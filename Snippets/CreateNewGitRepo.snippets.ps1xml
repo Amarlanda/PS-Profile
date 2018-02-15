@@ -1,0 +1,48 @@
+﻿<?xml version='1.0' encoding='utf-8' ?>
+    <Snippets  xmlns='http://schemas.microsoft.com/PowerShell/Snippets'>
+        <Snippet Version='1.0.0'>
+            <Header>
+                <Title>CreateNewGitRepo</Title>
+                <Description>Creates New Git Repo PS</Description>
+                <Shortcut></Shortcut> 
+                <Keywords>editor,console</Keywords>
+                <Author>Amar landa</Author>
+                <DifficultyLevel>1</DifficultyLevel>
+                <Example>False</Example>
+                <SnippetTypes>
+                    <SnippetType>Expansion</SnippetType>
+                </SnippetTypes>
+                <Requirements>
+                    <MinimumPowerShellVersion>1</MinimumPowerShellVersion>
+                    <RequiredModules></RequiredModules>
+                    <AdminPrivileges>False</AdminPrivileges>
+                    <ProcessorArchitecture>x64</ProcessorArchitecture>
+                </Requirements>
+            </Header>
+
+            <Code>
+                <Script Language='PowerShell' CaretOffset='670'>
+                    <![CDATA[function CreateNewGitRepo(){
+#http://codegists.com/snippet/powershell/create-github-repops1_derrysmith-nrhl_powershell
+# create new repository on github
+ 
+## github api url
+$url = "https://api.github.com/user/repos"
+ 
+## headers
+$kvp = @{ "Accept" = "application/vnd.github.v3+json"; "Authorization" = "Basic ZHVycnmzbWl0aEpEN0BuUnlAbjAxMzF=" }
+ 
+## request
+$req = @{"name"="repo004";"description"="description of repo004";"private"=$false;"has_issues"=$true;"has_wiki"=$false} | ConvertTo-Json
+ 
+## response
+$res = Invoke-RestMethod -Method Post -Uri $url -Headers $kvp -Body $req
+ 
+$res | Format-Table -AutoSize -Wrap -Property id,name,description
+
+}]]>
+                </Script>
+            </Code>
+
+    </Snippet>
+</Snippets>
